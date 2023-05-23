@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="notes">Notes</string>
+    <string name="emptyDesc">" "</string>
+    <string name="createFirstNote">Create your first note!</string>
+    <string name="searchBarText">Search by the keyword..</string>
+    <string name="title">Title</string>
+    <string name="typeSometing">Type something…</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="areYouSure">Are you sure you want delete this note?</string>
+</resources>

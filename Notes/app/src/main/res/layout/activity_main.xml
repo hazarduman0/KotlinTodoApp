@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mainObject"
+            type="com.example.notes.activity.notes.MainActivity" />
+
+        <variable
+            name="searchText"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        tools:context=".activity.notes.MainActivity">
+
+        <TextView
+            android:id="@+id/appHeader"
+            style="@style/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/notes"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            style="@style/app_button"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{() -> mainObject.searchButtonClick()}"
+            android:src="@drawable/search"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/themeButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/themeButton"
+            style="@style/app_button"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:onClick="@{() -> mainObject.themeButtonClick()}"
+            android:src="@drawable/icon_sun_24"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/mainScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="108dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/noteListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="64dp"
+                android:background="@drawable/menu_list_background"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp" />
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/orange"
+            android:onClick="@{() -> mainObject.onFloatingActionButtonClick()}"
+            android:elevation="50dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/icon_add_35"
+            android:tint="@null"
+            android:contentDescription="@string/emptyDesc" />
+
+        <LinearLayout
+            android:id="@+id/noNoteInfo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="96dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appHeader">
+
+            <ImageView
+                android:id="@+id/noNoteImg"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/rafiki"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@drawable/rafiki" />
+
+            <TextView
+                android:id="@+id/noNoteText"
+                style="@style/regular_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:gravity="center"
+                android:text="@string/createFirstNote" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/searchFrameLayout"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/searchbar_background"
+                android:hint="@string/searchBarText"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:text="@{searchText}"
+                android:afterTextChanged="@{(str) -> mainObject.afterTextChanged(str)}"
+                android:textColor="@color/search_text_color"
+                android:textColorHint="@color/search_text_color"
+                android:ems="10"
+                android:inputType="text" />
+
+            <ImageButton
+                android:id="@+id/btnClear"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:onClick="@{(view) -> mainObject.clearButtonClick(view)}"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/icon_x_24" />
+
+        </FrameLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
